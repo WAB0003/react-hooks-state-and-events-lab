@@ -1,18 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 import ShoppingList from "./ShoppingList";
 import itemData from "../data/items";
+import { findAllByDisplayValue } from "@testing-library/react";
 
 function App() {
-
+  const [isDark,setIsDark] = useState(false)
   // replace 'false' with a state variable that can be toggled between true and false
   // this will be used for the Dark Mode Toggle feature
-  const appClass = false ? "App dark" : "App light"
+  const appClass = isDark ? "App dark" : "App light"
+  
+  function handleClick() {
+    console.log(isDark)
+    setIsDark(!isDark)
+  }
 
   return (
     <div className={appClass}>
       <header>
         <h2>Shopster</h2>
-        <button>Dark Mode</button>
+        <button onClick={handleClick}>{isDark ? "Light Mode" : "Dark Mode"}</button>
       </header>
       <ShoppingList items={itemData} />
     </div>
